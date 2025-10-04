@@ -1,4 +1,4 @@
-from sqlalchemy import create_async_engine, AsyncSession, async_sessionmaker
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
 from sqlalchemy.pool import StaticPool
 from app.core.config import settings
 

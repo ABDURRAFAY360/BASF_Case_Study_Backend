@@ -6,4 +6,12 @@ BASF_Book_Recommendation_System.egg-info/requires.txt
 BASF_Book_Recommendation_System.egg-info/top_level.txt
 app/main.py
 app/api/api_v1/router.py
+app/api/api_v1/endpoints/auth.py
 app/core/config.py
+app/core/security.py
+app/db/base.py
+app/db/session.py
+app/models/user.py
+app/repositories/user_repo.py
+app/schemas/auth.py
+app/services/auth_service.py

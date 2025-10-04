@@ -12,5 +12,8 @@ dependencies = [
     "uvicorn[standard]",
     "pydantic-settings",
     "SQLAlchemy",
-    "aiosqlite"
+    "aiosqlite",
+    "python-jose",
+    "passlib",
+    "bcrypt"
 ]

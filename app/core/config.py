@@ -6,6 +6,11 @@ class Settings(BaseSettings):
     VERSION: str = "0.1.0"
     DESCRIPTION: str = "Book Recommendation FastAPI Application"
     AUTHOR_NAME: str = "Abdur Rafay"
+    DATABASE_URL: str
+    USERS_SEED_FILE: str = "data/users_seed.json"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int
+    SECRET_KEY: str
+    ALGORITHM: str = "HS256"
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 
 settings = Settings()
