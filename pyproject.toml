@@ -20,5 +20,8 @@ dependencies = [
     "pytest-asyncio",
     "httpx",
     "ruff",
-    "mypy"
+    "mypy",
+    "celery",
+    "redis", 
+    "asyncpg"
 ]

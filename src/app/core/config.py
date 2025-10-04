@@ -13,6 +13,9 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int
     SECRET_KEY: str
     ALGORITHM: str = "HS256"
+    GOOGLE_BOOKS_ENABLED: bool = True
+    GOOGLE_BOOKS_DEFAULT_QUERY: str = "python programming"
+    GOOGLE_BOOKS_MAX_RESULTS: int = 20
     model_config = SettingsConfigDict(
         env_file=".env", env_file_encoding="utf-8", extra="ignore"
     )
