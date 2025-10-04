@@ -11,6 +11,7 @@ from app.repositories.user_repo import UserRepository
 from app.repositories.book_repo import BookRepository
 from app.core.security import hash_password
 from app.core.logging import setup_logger
+from app.services.book_service import BookService
 
 logger = setup_logger(__name__)
 
@@ -66,13 +67,20 @@ async def seed_users() -> None:
 
 
 async def seed_books() -> None:
-    """Seed books from JSON file if available."""
+    #Seed books from JSON file.
+    # async with AsyncSessionLocal() as session:
+    #     repo = BookRepository(session)
+    #     if await repo.seed_books():
+    #         logger.info("Books seeded successfully.")
+    #     else:
+    #         logger.info("No book seed file found, skipping book seeding.")
+    # Seed books from JSON file.
     async with AsyncSessionLocal() as session:
-        repo = BookRepository(session)
-        if await repo.seed_books():
+        book_service = BookService(session)
+        if await book_service.seed_from_google(query="python development", limit=15):
             logger.info("Books seeded successfully.")
         else:
-            logger.info("No book seed file found, skipping book seeding.")
+            logger.info("No books found, skipping book seeding.")
 
 
 @app.on_event("startup")

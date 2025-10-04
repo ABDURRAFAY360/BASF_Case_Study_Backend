@@ -2,7 +2,10 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.repositories.book_repo import BookRepository
 from app.repositories.review_repo import ReviewRepository
 from app.schemas.book import BookRead
+from app.clients.google_book_clients import GoogleBooksClient
+from app.core.logging import setup_logger
 
+logger = setup_logger(__name__)
 
 class BookService:
     def __init__(self, session: AsyncSession):
@@ -27,6 +30,26 @@ class BookService:
                 )
             )
         return out
+    
+    async def seed_from_google(self, query: str = "python programming", limit: int = 20) -> bool:
+        """Fetch books from Google Books API and seed them into DB.
+        Returns:
+            True if successful, False if any error occurs.
+        """
+        client = GoogleBooksClient()
+        try:
+            fetched_books = await client.search_books(query=query, max_results=limit)
+            if not fetched_books:
+                logger.warning("No books fetched from Google Books API for query='%s'", query)
+                return False
 
-    async def seed_if_needed(self, books: list[dict]) -> None:
-        await self.books.seed_if_empty(books)
+            await self.books.seed_books(fetched_books)
+            logger.info("Seeded %d books from Google API for query='%s'", len(fetched_books), query)
+            return True
+
+        except Exception as e:
+            logger.exception("Failed to seed books from Google API: %s", e)
+            return False
+
+        finally:
+            await client.close()
