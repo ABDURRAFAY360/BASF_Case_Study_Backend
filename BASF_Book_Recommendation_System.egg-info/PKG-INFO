@@ -14,3 +14,5 @@ Requires-Dist: bcrypt
 Requires-Dist: pytest
 Requires-Dist: pytest-asyncio
 Requires-Dist: httpx
+Requires-Dist: ruff
+Requires-Dist: mypy

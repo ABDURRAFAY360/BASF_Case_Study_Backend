@@ -11,6 +11,7 @@ app/api/v1/endpoints/auth.py
 app/api/v1/endpoints/book.py
 app/api/v1/endpoints/review.py
 app/core/config.py
+app/core/logging.py
 app/core/security.py
 app/db/base.py
 app/db/session.py

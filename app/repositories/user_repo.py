@@ -3,6 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.models.user import User
 from app.core.security import verify_password
 
+
 class UserRepository:
     def __init__(self, session: AsyncSession):
         self.session = session
@@ -13,7 +14,7 @@ class UserRepository:
         if not user or not verify_password(password, user.password):
             return False
         return True
-        
+
     async def get_by_username(self, username: str) -> User:
         stmt = select(User).where(User.username == username).limit(1)
         res = await self.session.execute(stmt)
@@ -32,7 +33,9 @@ class UserRepository:
         existing_usernames = {row[0] for row in result.fetchall()}
 
         # Prepare only new users
-        new_users = [User(**user) for user in users if user["username"] not in existing_usernames]
+        new_users = [
+            User(**user) for user in users if user["username"] not in existing_usernames
+        ]
 
         # Bulk add new users
         if new_users:

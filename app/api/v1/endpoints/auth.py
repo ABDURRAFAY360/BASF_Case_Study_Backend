@@ -9,10 +9,14 @@ from sqlalchemy import select
 
 router = APIRouter()
 
+
 @router.post("/login", response_model=TokenResponse)
-async def login(payload: LoginRequest, db: AsyncSession = Depends(get_session)) -> TokenResponse:
+async def login(
+    payload: LoginRequest, db: AsyncSession = Depends(get_session)
+) -> TokenResponse:
     token = await AuthUseCases(db).login(payload.username, payload.password)
     return TokenResponse(access_token=token)
+
 
 @router.get("/debug-users")
 async def debug_users(db: AsyncSession = Depends(get_session)):

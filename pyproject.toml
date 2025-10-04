@@ -18,5 +18,7 @@ dependencies = [
     "bcrypt",
     "pytest",
     "pytest-asyncio",
-    "httpx"
+    "httpx",
+    "ruff",
+    "mypy"
 ]

@@ -9,3 +9,5 @@ bcrypt
 pytest
 pytest-asyncio
 httpx
+ruff
+mypy

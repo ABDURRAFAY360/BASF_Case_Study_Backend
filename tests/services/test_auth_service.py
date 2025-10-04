@@ -1,6 +1,5 @@
 import pytest
 from jose import jwt
-from sqlalchemy import select
 
 from app.core.config import settings
 from app.core.security import hash_password
@@ -9,6 +8,7 @@ from app.db.session import engine, AsyncSessionLocal
 from app.models.user import User
 from app.services.auth_service import AuthUseCases
 from fastapi import HTTPException
+
 
 # --- session-scoped DB setup once per test session ---
 @pytest.fixture(scope="session", autouse=True)
@@ -58,6 +58,6 @@ async def test_login_wrong_password_raises_401():
             await AuthUseCases(s).login("rafay", "testfail")
         # FastAPI raises HTTPException in service (status_code=401)
         # we just check it's an HTTPException and code is 401
-  
+
         assert isinstance(excinfo.value, HTTPException)
         assert getattr(excinfo.value, "status_code", None) == 401

@@ -7,11 +7,12 @@ import json
 from pathlib import Path
 from app.core.config import settings
 
+
 class BookRepository:
     def __init__(self, session: AsyncSession):
         self.session = session
 
-    async def seed_books(self, books:List[Dict]=None) -> bool:
+    async def seed_books(self, books: List[Dict] = None) -> bool:
         rows = books
         # Load from seed file if no books were passed
         if not rows:
@@ -31,7 +32,6 @@ class BookRepository:
         await self.session.commit()
         return True
 
-
     async def list_with_avg(
         self,
         *,
@@ -39,7 +39,6 @@ class BookRepository:
         limit: int = 10,
         offset: int = 0,
     ) -> List[Dict]:
-
         avg_rating = func.avg(Review.rating).label("average_rating")
 
         # Base query
@@ -56,8 +55,8 @@ class BookRepository:
         if search:
             like_pattern = f"%{search.lower()}%"
             stmt = stmt.where(
-                func.lower(Book.title).like(like_pattern) |
-                func.lower(Book.author).like(like_pattern)
+                func.lower(Book.title).like(like_pattern)
+                | func.lower(Book.author).like(like_pattern)
             )
 
         # Execute query
