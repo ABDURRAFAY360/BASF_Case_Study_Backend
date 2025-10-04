@@ -1,0 +1,9 @@
+pyproject.toml
+BASF_Book_Recommendation_System.egg-info/PKG-INFO
+BASF_Book_Recommendation_System.egg-info/SOURCES.txt
+BASF_Book_Recommendation_System.egg-info/dependency_links.txt
+BASF_Book_Recommendation_System.egg-info/requires.txt
+BASF_Book_Recommendation_System.egg-info/top_level.txt
+app/main.py
+app/api/api_v1/router.py
+app/core/config.py
