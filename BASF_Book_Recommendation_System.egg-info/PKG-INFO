@@ -6,3 +6,5 @@ Requires-Python: >=3.8
 Requires-Dist: fastapi
 Requires-Dist: uvicorn[standard]
 Requires-Dist: pydantic-settings
+Requires-Dist: SQLAlchemy
+Requires-Dist: aiosqlite
