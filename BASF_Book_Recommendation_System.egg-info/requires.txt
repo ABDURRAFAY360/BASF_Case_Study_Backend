@@ -6,3 +6,6 @@ aiosqlite
 python-jose
 passlib
 bcrypt
+pytest
+pytest-asyncio
+httpx

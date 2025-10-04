@@ -15,5 +15,8 @@ dependencies = [
     "aiosqlite",
     "python-jose",
     "passlib",
-    "bcrypt"
+    "bcrypt",
+    "pytest",
+    "pytest-asyncio",
+    "httpx"
 ]

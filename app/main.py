@@ -62,15 +62,11 @@ async def on_startup() -> None:
     # Seed books if empty
     async with AsyncSessionLocal() as session:
         repo = BookRepository(session)
-        seed_path = Path(settings.BOOKS_SEED_FILE).resolve()
-        print("seed_path:", seed_path)
-        if seed_path.exists():
-            rows = json.loads(seed_path.read_text())
-            print("rows:", rows)
-            await repo.seed_books(rows)
+        book_seeded = await repo.seed_books()
+        if book_seeded:
+            print("Books seeded successfully.")
         else:
             print("No book seed file found, skipping book seeding.")
-       
         
 app.include_router(api_router, prefix=settings.API_V1_STR)
 

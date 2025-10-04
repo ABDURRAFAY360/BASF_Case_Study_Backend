@@ -11,7 +11,6 @@ class BookService:
     async def list_books(self, *, search: str, limit: int, offset: int) -> list[BookRead]:
         rows = await self.books.list_with_avg(search=search, limit=limit, offset=offset)
         out: list[BookRead] = []
-        print("bookiqdqddqdqngss", rows[0])
         for row in rows:
             book = row["book"]                # the Book object
             avg = row["average_rating"]       # the float/None

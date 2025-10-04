@@ -1,0 +1,27 @@
+import pytest
+from app.db.session import AsyncSessionLocal
+from app.repositories.book_repo import BookRepository
+from app.services.review_service import ReviewService
+from app.schemas.review import ReviewUpsertRequest
+from app.services.book_service import BookService
+
+@pytest.mark.asyncio
+async def test_average_rating_multiple_users_and_updates():
+    async with AsyncSessionLocal() as db:
+        # Seed one book
+        await BookRepository(db).seed_if_empty([
+            {"title": "My book", "author": "A1", "genre": "G"}
+        ])
+
+        rsvc = ReviewService(db)
+        bsvc = BookService(db)
+
+        # Two different users rate: 4 and 2 -> average = 3.0
+        await rsvc.upsert(book_id=1, username="abdur",
+                          data=ReviewUpsertRequest(rating=4, review_text="good"))
+        await rsvc.upsert(book_id=1, username="rafay",
+                          data=ReviewUpsertRequest(rating=2, review_text="not good"))
+
+        books = await bsvc.list_books(search="My book", limit=10, offset=0)
+        assert len(books) == 1
+        assert books[0].average_rating == pytest.approx(3.0)

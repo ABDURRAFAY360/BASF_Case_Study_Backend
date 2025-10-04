@@ -11,3 +11,6 @@ Requires-Dist: aiosqlite
 Requires-Dist: python-jose
 Requires-Dist: passlib
 Requires-Dist: bcrypt
+Requires-Dist: pytest
+Requires-Dist: pytest-asyncio
+Requires-Dist: httpx
