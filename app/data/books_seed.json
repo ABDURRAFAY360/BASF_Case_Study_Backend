@@ -1,0 +1,7 @@
+[
+  {"title":"Clean Code","author":"Robert C. Martin","genre":"Software"},
+  {"title":"The Pragmatic Programmer","author":"Andrew Hunt, David Thomas","genre":"Software"},
+  {"title":"Designing Data-Intensive Applications","author":"Martin Kleppmann","genre":"Data"},
+  {"title":"Python Crash Course","author":"Eric Matthes","genre":"Programming"},
+  {"title":"Deep Learning","author":"Ian Goodfellow, Yoshua Bengio, Aaron Courville","genre":"AI"}
+]

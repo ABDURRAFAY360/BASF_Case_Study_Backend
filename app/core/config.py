@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     AUTHOR_NAME: str = "Abdur Rafay"
     DATABASE_URL: str
     USERS_SEED_FILE: str = "data/users_seed.json"
+    BOOKS_SEED_FILE: str = "data/books_seed.json"
     ACCESS_TOKEN_EXPIRE_MINUTES: int
     SECRET_KEY: str
     ALGORITHM: str = "HS256"

@@ -7,7 +7,7 @@ from app.models.user import User
 from sqlalchemy import select
 
 
-router = APIRouter(prefix="/auth", tags=["Auth"])
+router = APIRouter()
 
 @router.post("/login", response_model=TokenResponse)
 async def login(payload: LoginRequest, db: AsyncSession = Depends(get_session)) -> TokenResponse:
