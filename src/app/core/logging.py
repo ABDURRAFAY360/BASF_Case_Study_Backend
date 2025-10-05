@@ -2,6 +2,7 @@ import logging
 import sys
 from pathlib import Path
 
+
 def setup_logger(name: str = "app") -> logging.Logger:
     """Configure and return a logger instance."""
     logger = logging.getLogger(name)

@@ -11,10 +11,7 @@ def verify_password(plain: str, hashed: str) -> bool:
 
 
 def hash_password(plain: str) -> str:
-    print("hashing text:", plain)
-    print("hashing type:", type(plain), "value:", plain, "len:", len(str(plain)))
     hashed = pwd.hash(plain)
-    print("Hashing password:", hashed)
     return hashed
 
 

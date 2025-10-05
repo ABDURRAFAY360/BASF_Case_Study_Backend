@@ -17,6 +17,7 @@ async def get_books(
 ) -> list[BookRead]:
     return await BookService(db).list_books(search=search, limit=limit, offset=offset)
 
+
 @router.post("/refresh-books")
 async def refresh_books_now():
     task = celery_app.send_task("app.task.books.refresh_books")
