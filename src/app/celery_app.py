@@ -20,6 +20,6 @@ celery_app.conf.beat_schedule = {
     "refresh-books-every-12h": {
         "task": "app.tasks.books.refresh_books",
         "schedule": 60 * 60 * 12,  # every 12 hours
-        "args": ["fastapi development", 25],  # default params: query, limit
+        "args": ["Harry Potter", 10],  # default params: query, limit
     }
 }

@@ -9,7 +9,7 @@ logger = setup_logger(__name__)
 
 
 @shared_task(name="app.task.books.refresh_books")
-def refresh_books() -> int:
+def refresh_books(query: str = settings.GOOGLE_BOOKS_DEFAULT_QUERY, limit: int = settings.GOOGLE_BOOKS_MAX_RESULTS) -> int:
     if not settings.GOOGLE_BOOKS_ENABLED:
         return 0
 
@@ -17,12 +17,12 @@ def refresh_books() -> int:
         async with AsyncSessionLocal() as session:
             book_service = BookService(session)
             ok = await book_service.seed_from_google(
-                settings.GOOGLE_BOOKS_DEFAULT_QUERY, settings.GOOGLE_BOOKS_MAX_RESULTS
+                query, limit
             )
             return {
                 "ok": ok,
-                "query": settings.GOOGLE_BOOKS_DEFAULT_QUERY,
-                "limit": settings.GOOGLE_BOOKS_MAX_RESULTS,
+                "query": query,
+                "limit": limit,
             }
 
     try:
