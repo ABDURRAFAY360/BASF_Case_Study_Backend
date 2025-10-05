@@ -1,5 +1,4 @@
 # BASF Book Recommendation System Backend
-[![Ask DeepWiki](https://devin.ai/assets/askdeepwiki.png)](https://deepwiki.com/ABDURRAFAY360/BASF_Case_Study_Backend)
 
 This repository contains the backend service for a book recommendation system built with FastAPI. It provides a RESTful API for user authentication, book management, and user reviews. The system can be seeded with an initial set of books and periodically updates its catalog from the Google Books API using background tasks.
 
