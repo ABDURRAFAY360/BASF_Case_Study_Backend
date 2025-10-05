@@ -42,6 +42,7 @@ async def init_db() -> None:
 async def seed_users() -> None:
     """Seed users from JSON file if available."""
     seed_path = Path(settings.USERS_SEED_FILE).resolve()
+    logger.info(f"Seeding users from {seed_path}")
     if not seed_path.exists():
         logger.info("No user seed file found, skipping user seeding.")
         return
@@ -77,7 +78,7 @@ async def seed_books() -> None:
     # Seed books from JSON file.
     async with AsyncSessionLocal() as session:
         book_service = BookService(session)
-        if await book_service.seed_from_google(query="python development", limit=15):
+        if await book_service.seed_from_google(query="python development", limit=10):
             logger.info("Books seeded successfully.")
         else:
             logger.info("No books found, skipping book seeding.")

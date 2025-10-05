@@ -1,4 +1,4 @@
-from sqlalchemy import Select, func, select
+from sqlalchemy import Select, func, select, and_
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.models.book import Book
 from app.models.review import Review
@@ -28,10 +28,27 @@ class BookRepository:
         if not rows:
             return False  # No data at all
         # Insert into DB
-        self.session.add_all([Book(**b) for b in rows])
-        await self.session.commit()
-        return True
+        inserted = 0
+        for book in books:
+            title = book["title"]
+            author = book["author"]
 
+            # Check if book already exists (same title + author)
+            stmt = select(Book).where(
+                and_(Book.title == title, Book.author == author)
+            )
+            result = await self.session.execute(stmt)
+            existing_book = result.scalar_one_or_none()
+
+            # Only insert if it doesn't exist
+            if not existing_book:
+                self.session.add(Book(**book))
+                inserted += 1
+
+        if inserted:
+            await self.session.commit()
+       
+        return True
     async def list_with_avg(
         self,
         *,

@@ -1,3 +1,4 @@
+from app.celery_app import celery_app
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.api.deps import get_db, get_current_username
@@ -15,3 +16,8 @@ async def get_books(
     db: AsyncSession = Depends(get_db),
 ) -> list[BookRead]:
     return await BookService(db).list_books(search=search, limit=limit, offset=offset)
+
+@router.post("/refresh-books")
+async def refresh_books_now():
+    task = celery_app.send_task("app.task.books.refresh_books")
+    return {"task_id": task.id, "status": "queued"}

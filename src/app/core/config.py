@@ -8,14 +8,17 @@ class Settings(BaseSettings):
     DESCRIPTION: str = "Book Recommendation FastAPI Application"
     AUTHOR_NAME: str = "Abdur Rafay"
     DATABASE_URL: str
-    USERS_SEED_FILE: str = "data/users_seed.json"
-    BOOKS_SEED_FILE: str = "data/books_seed.json"
+    USERS_SEED_FILE: str = "src/app/data/users_seed.json"
+    BOOKS_SEED_FILE: str = "src/app/data/books_seed.json"
     ACCESS_TOKEN_EXPIRE_MINUTES: int
     SECRET_KEY: str
     ALGORITHM: str = "HS256"
     GOOGLE_BOOKS_ENABLED: bool = True
     GOOGLE_BOOKS_DEFAULT_QUERY: str = "python programming"
     GOOGLE_BOOKS_MAX_RESULTS: int = 20
+    DATABASE_URL: str
+    REDIS_URL: str = "redis://localhost:6379/0"
+    CELERY_RESULT_BACKEND: str = "redis://localhost:6379/1"
     model_config = SettingsConfigDict(
         env_file=".env", env_file_encoding="utf-8", extra="ignore"
     )
